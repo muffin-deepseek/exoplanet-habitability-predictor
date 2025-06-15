@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/exoplanet-habitability-predictor/static/css/main.82579c09.css",
-    "main.js": "/exoplanet-habitability-predictor/static/js/main.73fdb9e4.js",
+    "main.css": "/exoplanet-habitability-predictor/static/css/main.eca96469.css",
+    "main.js": "/exoplanet-habitability-predictor/static/js/main.fa728062.js",
     "index.html": "/exoplanet-habitability-predictor/index.html",
-    "main.82579c09.css.map": "/exoplanet-habitability-predictor/static/css/main.82579c09.css.map",
-    "main.73fdb9e4.js.map": "/exoplanet-habitability-predictor/static/js/main.73fdb9e4.js.map"
+    "main.eca96469.css.map": "/exoplanet-habitability-predictor/static/css/main.eca96469.css.map",
+    "main.fa728062.js.map": "/exoplanet-habitability-predictor/static/js/main.fa728062.js.map"
   },
   "entrypoints": [
-    "static/css/main.82579c09.css",
-    "static/js/main.73fdb9e4.js"
+    "static/css/main.eca96469.css",
+    "static/js/main.fa728062.js"
   ]
 }
