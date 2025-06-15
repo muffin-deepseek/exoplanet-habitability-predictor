@@ -31,31 +31,31 @@ const Sidebar = ({ activeSection, setActiveSection }) => {
   ];
 
   return (
-    <div className="w-64 bg-black/40 backdrop-blur-sm border-r border-gray-800/50 min-h-screen p-4">
+    <div className="w-64 bg-black border-r border-gray-900 min-h-screen p-6">
       {/* Stellar Logo Section */}
-      <div className="flex items-center space-x-3 mb-8 p-3">
-        <Stars className="w-6 h-6 text-white" />
-        <span className="text-lg font-bold text-white">Stellar</span>
+      <div className="flex items-center space-x-3 mb-12 p-2">
+        <Stars className="w-5 h-5 text-white" />
+        <span className="text-base font-light text-white tracking-wide" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>Stellar</span>
       </div>
 
       {/* Navigation Items */}
-      <nav className="space-y-2">
+      <nav className="space-y-1">
         {sidebarItems.map((item) => {
           const Icon = item.icon;
           return (
             <motion.button
               key={item.id}
               onClick={() => setActiveSection(item.id)}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className={`w-full flex items-center space-x-3 p-3 rounded-lg text-left transition-all duration-200 ${
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
+              className={`w-full flex items-center space-x-3 p-4 text-left transition-all duration-300 ${
                 item.active 
-                  ? 'bg-blue-600/20 text-blue-400 border border-blue-500/30' 
-                  : 'text-gray-300 hover:bg-gray-800/50 hover:text-white'
+                  ? 'text-white border-l-2 border-blue-500 bg-gray-900/30' 
+                  : 'text-gray-500 hover:text-gray-300 hover:bg-gray-900/20'
               }`}
             >
-              <Icon className="w-5 h-5" />
-              <span className="font-medium">{item.name}</span>
+              <Icon className="w-4 h-4" />
+              <span className="font-light text-sm tracking-wide" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>{item.name}</span>
             </motion.button>
           );
         })}

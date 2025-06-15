@@ -11,7 +11,7 @@ function App() {
 
   return (
     <ExoplanetProvider>
-      <div className="App min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900">
+      <div className="App min-h-screen bg-black">
         <Header />
         <div className="flex">
           <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} />
