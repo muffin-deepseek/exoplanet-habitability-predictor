@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/exoplanet-habitability-predictor/static/css/main.dc87cd9a.css",
+    "main.js": "/exoplanet-habitability-predictor/static/js/main.8bbd7ddd.js",
+    "index.html": "/exoplanet-habitability-predictor/index.html",
+    "main.dc87cd9a.css.map": "/exoplanet-habitability-predictor/static/css/main.dc87cd9a.css.map",
+    "main.8bbd7ddd.js.map": "/exoplanet-habitability-predictor/static/js/main.8bbd7ddd.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dc87cd9a.css",
+    "static/js/main.8bbd7ddd.js"
+  ]
+}
