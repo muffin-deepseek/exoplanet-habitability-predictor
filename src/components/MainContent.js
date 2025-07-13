@@ -4,6 +4,8 @@ import ExploreDatabase from './ExploreDatabase';
 import CalculateHabitability from './CalculateHabitability';
 import ImageGeneration from './ImageGeneration';
 import SavedExoPlanets from './SavedExoPlanets';
+import AboutUs from './AboutUs';
+import HowToUse from './HowToUse';
 
 const MainContent = ({ activeSection }) => {
   const renderContent = () => {
@@ -16,6 +18,10 @@ const MainContent = ({ activeSection }) => {
         return <ImageGeneration />;
       case 'saved-exo-planets':
         return <SavedExoPlanets />;
+      case 'about-us':
+        return <AboutUs />;
+      case 'how-to-use':
+        return <HowToUse />;
       default:
         return <HabitabilityAnalysis />;
     }

@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import MainContent from './components/MainContent';
 import NotificationSystem from './components/NotificationSystem';
+import HabitabilityAnalysis from './components/HabitabilityAnalysis';
 
 function App() {
   const [activeSection, setActiveSection] = useState('habitability-analysis');
@@ -12,10 +13,14 @@ function App() {
   return (
     <ExoplanetProvider>
       <div className="App min-h-screen bg-black">
-        <Header />
+        <Header setActiveSection={setActiveSection} />
         <div className="flex">
           <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} />
-          <MainContent activeSection={activeSection} />
+          {activeSection === 'habitability-analysis' ? (
+            <HabitabilityAnalysis setActiveSection={setActiveSection} />
+          ) : (
+            <MainContent activeSection={activeSection} />
+          )}
         </div>
         <NotificationSystem />
       </div>

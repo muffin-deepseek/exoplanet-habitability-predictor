@@ -27,6 +27,18 @@ const Sidebar = ({ activeSection, setActiveSection }) => {
       name: 'Saved Exo-Planets', 
       icon: Bookmark,
       active: activeSection === 'saved-exo-planets'
+    },
+    { 
+      id: 'about-us', 
+      name: 'About Us', 
+      icon: Stars,
+      active: activeSection === 'about-us'
+    },
+    { 
+      id: 'how-to-use', 
+      name: 'How to Use', 
+      icon: Stars,
+      active: activeSection === 'how-to-use'
     }
   ];
 
