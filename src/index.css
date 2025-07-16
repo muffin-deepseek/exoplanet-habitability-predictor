@@ -6,40 +6,188 @@
   * {
     box-sizing: border-box;
   }
-  
   html {
     font-family: 'Inter', system-ui, sans-serif;
     scroll-behavior: smooth;
+    background: #0d1b2a;
   }
-  
   body {
     margin: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    background: linear-gradient(135deg, #0d1b2a 0%, #1a0b3d 60%, #111827 100%);
     min-height: 100vh;
+    color: #e0e7ef;
   }
 }
 
 @layer components {
   .glass-effect {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(24, 28, 48, 0.15);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(0, 212, 255, 0.08);
   }
-  
   .gradient-text {
-    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #1d4ed8 100%);
+    background: linear-gradient(90deg, #60a5fa 0%, #00D4FF 50%, #1a0b3d 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  
   .button-primary {
-    @apply bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl;
+    @apply bg-gradient-to-r from-blue-700 to-blue-900 hover:from-blue-800 hover:to-blue-950 text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl;
   }
-  
   .card-hover {
     @apply transition-all duration-300 hover:transform hover:scale-105 hover:shadow-2xl;
   }
+}
+
+/* --- Cosmic Starfield Animation --- */
+.starfield {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.8);
+  width: 2px;
+  height: 2px;
+  opacity: 0.7;
+  animation: twinkle 4s infinite linear;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 0.2; }
+}
+
+/* --- Planet Rotation & Glow --- */
+.planet-3d {
+  animation: planet-rotate 60s linear infinite;
+  filter: drop-shadow(0 0 60px #00D4FF) drop-shadow(0 0 120px #1a0b3d);
+}
+@keyframes planet-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.planet-glow {
+  animation: planet-glow-pulse 2s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 40px #00D4FF) drop-shadow(0 0 80px #1a0b3d);
+}
+@keyframes planet-glow-pulse {
+  0% { opacity: 0.8; }
+  100% { opacity: 1; }
+}
+.planet-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  border: 2px solid rgba(0,212,255,0.15);
+  box-shadow: 0 0 40px 10px #00D4FF33;
+  animation: ring-rotate 90s linear infinite;
+  z-index: 2;
+}
+@keyframes ring-rotate {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* --- Button Effects --- */
+.cta-planet {
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s, transform 0.3s;
+  box-shadow: 0 0 24px 0 #00D4FF44;
+}
+.cta-planet:hover {
+  box-shadow: 0 0 48px 8px #00D4FF88, 0 0 0 4px #1a0b3d44;
+  transform: scale(1.05);
+}
+.cta-planet:active {
+  transform: scale(0.98);
+}
+.cta-planet .particle-burst {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* --- Gradient Text & Glow --- */
+.gradient-text {
+  background: linear-gradient(90deg, #60a5fa 0%, #00D4FF 50%, #1a0b3d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 16px #00D4FF88, 0 0 32px #1a0b3d44;
+}
+.text-glow {
+  text-shadow: 0 0 12px #00D4FF, 0 0 24px #1a0b3d;
+}
+
+/* --- Sidebar Glassmorphism & Icon Effects --- */
+.sidebar-glass {
+  background: rgba(16, 18, 36, 0.7);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(0,212,255,0.08);
+  box-shadow: 0 4px 32px 0 #1a0b3d22;
+}
+.sidebar-nav-btn {
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+}
+.sidebar-nav-btn:hover, .sidebar-nav-btn:focus {
+  background: rgba(0,212,255,0.08);
+  color: #00D4FF;
+  box-shadow: 0 0 12px #00D4FF44;
+}
+.sidebar-nav-btn.active {
+  color: #00D4FF;
+  background: rgba(0,212,255,0.15);
+  box-shadow: 0 0 24px #00D4FF88;
+}
+.sidebar-nav-btn .sidebar-icon {
+  transition: filter 0.3s, transform 0.3s;
+}
+.sidebar-nav-btn:hover .sidebar-icon {
+  filter: drop-shadow(0 0 8px #00D4FF);
+  transform: scale(1.1);
+}
+
+/* --- Smooth Transitions --- */
+* {
+  transition: color 0.2s, background 0.2s, box-shadow 0.2s, filter 0.2s, border 0.2s;
+}
+
+/* --- Mobile Optimization --- */
+@media (max-width: 600px) {
+  .planet-ring {
+    width: 260px;
+    height: 260px;
+  }
+  .starfield {
+    display: none;
+  }
+}
+
+/* --- Utility for Typewriter Effect (optional, JS required) --- */
+.typewriter {
+  overflow: hidden;
+  border-right: .15em solid #00D4FF;
+  white-space: nowrap;
+  animation: typing 2.5s steps(40, end), blink-caret .75s step-end infinite;
+}
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #00D4FF; }
 } 

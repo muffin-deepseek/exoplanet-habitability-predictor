@@ -1,166 +1,84 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Search } from 'lucide-react';
 
-const HabitabilityAnalysis = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+const NUM_STARS = 80;
+
+function createStarProps() {
+  return Array.from({ length: NUM_STARS }).map((_, i) => ({
+    key: i,
+    style: {
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 5}s`,
+      opacity: 0.5 + Math.random() * 0.5,
+      width: `${1 + Math.random() * 2}px`,
+      height: `${1 + Math.random() * 2}px`,
+    },
+  }));
+}
+
+const HabitabilityAnalysis = ({ setActiveSection }) => {
+  const starProps = useRef(createStarProps());
+
+  const handleButtonClick = (e) => {
+    if (setActiveSection) setActiveSection('calculate-habitability');
+  };
 
   return (
-    <div className="flex-1 bg-black min-h-screen relative overflow-hidden">
-      {/* Subtle space background */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-px h-px bg-white opacity-30 animate-pulse"></div>
-        <div className="absolute top-1/3 right-1/3 w-px h-px bg-white opacity-40 animate-pulse delay-1000"></div>
-        <div className="absolute bottom-1/4 left-1/2 w-px h-px bg-white opacity-20 animate-pulse delay-2000"></div>
-        <div className="absolute top-2/3 right-1/4 w-px h-px bg-white opacity-35 animate-pulse delay-500"></div>
-        <div className="absolute bottom-1/3 right-2/3 w-px h-px bg-white opacity-25 animate-pulse delay-1500"></div>
+    <div className="flex-1 min-h-screen relative overflow-hidden bg-gradient-to-br from-[#0d1b2a] via-[#1a0b3d] to-[#111827]">
+      {/* Starfield */}
+      <div className="starfield">
+        {starProps.current.map((props) => (
+          <div className="star" {...props} />
+        ))}
       </div>
 
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-8">
-        {/* Main Content - Ultra Clean */}
+      {/* Animated 3D Planet with Ring and Glow */}
+      <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none">
+        <div className="planet-ring"></div>
+        <motion.div
+          className="planet-3d planet-glow"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 2 }}
+          style={{ width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle at 60% 40%, #a5b4fc 0%, #2563eb 60%, #0f172a 100%)', boxShadow: '0 0 120px 40px #00D4FF33' }}
+        >
+        </motion.div>
+      </div>
+
+      <div className="relative z-20 flex flex-col items-center justify-center min-h-screen px-8">
         <div className="text-center max-w-5xl mx-auto">
-          {/* Main Heading - Minimalistic */}
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="text-5xl md:text-6xl font-light text-white mb-12 leading-tight tracking-wide"
-            style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+            transition={{ duration: 1, ease: 'easeOut' }}
+            className="text-6xl md:text-7xl font-extralight text-white mb-10 leading-tight tracking-wide drop-shadow-lg text-glow"
+            style={{ fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '0.04em', lineHeight: 1.1 }}
           >
             Science-driven<br />
-            <span className="font-normal">Habitability Analysis</span>
+            <span className="font-normal gradient-text">Habitability Analysis</span>
           </motion.h1>
-
-          {/* Clean Description */}
-          <motion.div 
+          <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-            className="mb-16"
+            transition={{ duration: 1, delay: 0.3, ease: 'easeOut' }}
+            className="text-2xl text-blue-200 max-w-3xl mx-auto leading-relaxed font-light tracking-wide mb-12 drop-shadow"
+            style={{ fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '0.03em', lineHeight: 1.4 }}
           >
-            <p className="text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed font-light tracking-wide mb-6"
-               style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
-              Our algorithm integrates the Conservative Habitable Zone (CHZ) model, Earth Similarity Index (ESI), 
-              and atmospheric chemical equilibrium calculations.
-            </p>
-            <p className="text-sm text-gray-500 font-light tracking-wider"
-               style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
-              All outputs are derived from peer-reviewed exoplanet research
-            </p>
-            <p className="text-xs text-gray-600 mt-2 font-light"
-               style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
-              Sources: Kopparapu et al. 2013, Schulze-Makuch et al. 2011
-            </p>
-          </motion.div>
-
-          {/* Minimal CTA Button */}
+            Explore the universe of exoplanets with our advanced, visually immersive, and scientifically robust habitability predictor.
+          </motion.p>
           <motion.button
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
-            whileHover={{ 
-              scale: 1.02,
-              backgroundColor: "rgba(59, 130, 246, 0.15)",
-              borderColor: "rgba(59, 130, 246, 0.6)"
-            }}
+            transition={{ duration: 1, delay: 0.6, ease: 'easeOut' }}
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
-            className="border border-gray-700 hover:border-blue-500/50 text-white px-12 py-4 rounded-sm font-light text-base transition-all duration-300 mb-20 tracking-wider bg-transparent"
-            style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+            className="border border-blue-500 bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-16 py-5 rounded-full font-semibold text-xl shadow-xl transition-all duration-300 mb-20 tracking-wider hover:from-blue-700 hover:to-indigo-800 hover:shadow-2xl cta-planet"
+            style={{ fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '0.04em' }}
+            onClick={handleButtonClick}
           >
             START RESEARCH
           </motion.button>
-        </div>
-
-        {/* Bottom Section - Clean Layout */}
-        <div className="w-full max-w-7xl mx-auto">
-          <div className="grid grid-cols-12 gap-16 items-center">
-            {/* Left Side - Minimal Circular Progress */}
-            <div className="col-span-4">
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
-                className="relative mx-auto w-48 h-48"
-              >
-                <svg className="w-48 h-48 transform -rotate-90">
-                  <circle
-                    cx="96"
-                    cy="96"
-                    r="88"
-                    stroke="rgba(55, 65, 81, 0.3)"
-                    strokeWidth="1"
-                    fill="none"
-                  />
-                  <motion.circle
-                    cx="96"
-                    cy="96"
-                    r="88"
-                    stroke="rgba(59, 130, 246, 0.8)"
-                    strokeWidth="1"
-                    fill="none"
-                    strokeDasharray={`${2 * Math.PI * 88}`}
-                    strokeDashoffset={`${2 * Math.PI * 88 * (1 - 0.5)}`}
-                    strokeLinecap="round"
-                    initial={{ strokeDashoffset: `${2 * Math.PI * 88}` }}
-                    animate={{ strokeDashoffset: `${2 * Math.PI * 88 * (1 - 0.5)}` }}
-                    transition={{ duration: 2, delay: 1.2, ease: "easeOut" }}
-                  />
-                </svg>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <motion.span 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.8, delay: 2 }}
-                    className="text-4xl font-light text-white tracking-wider"
-                    style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
-                  >
-                    50%
-                  </motion.span>
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Right Side - Clean Search Interface */}
-            <div className="col-span-8">
-              <motion.div 
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1, delay: 1.0, ease: "easeOut" }}
-                className="space-y-8"
-              >
-                {/* Search Bar - Ultra Minimal */}
-                <div className="bg-gray-900/30 border border-gray-800 rounded-sm p-6 backdrop-blur-sm">
-                  <div className="flex items-center space-x-4">
-                    <Search className="w-5 h-5 text-gray-500" />
-                    <input
-                      type="text"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder="Search"
-                      className="flex-1 bg-transparent text-white placeholder-gray-500 text-lg outline-none font-light tracking-wide"
-                      style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
-                    />
-                  </div>
-                </div>
-
-                {/* Minimal Tabs */}
-                <div className="flex space-x-12">
-                  <button className="text-white font-light text-base border-b border-blue-500 pb-3 tracking-wider"
-                          style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
-                    All
-                  </button>
-                  <button className="text-gray-500 hover:text-gray-300 font-light text-base pb-3 transition-colors tracking-wider"
-                          style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
-                    NASA
-                  </button>
-                  <button className="text-gray-500 hover:text-gray-300 font-light text-base pb-3 transition-colors tracking-wider"
-                          style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
-                    Kepler
-                  </button>
-                </div>
-              </motion.div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
